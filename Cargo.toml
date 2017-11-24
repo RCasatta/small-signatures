@@ -1,0 +1,9 @@
+[package]
+name = "small-signature"
+version = "0.1.0"
+authors = ["Riccardo Casatta <riccardo@casatta.it>"]
+
+[dependencies]
+secp256k1 = "0.7.1"
+rand = "0.3"
+libc = "0.2.33"
