@@ -4,6 +4,7 @@ extern crate libc;
 
 use secp256k1::{Secp256k1,Message, Signature,Error};
 use secp256k1::key::SecretKey;
+use secp256k1::key::PublicKey;
 use std::fmt::Write;
 use libc::c_void;
 use secp256k1::ffi;
@@ -11,10 +12,12 @@ use secp256k1::ffi::Context;
 use std::time::Instant;
 
 fn main() {
-    let hash = "57bb60f668db5467b92adc2bbcb0c129504c457cec90c0c2000616005a81a13b".from_hex().unwrap();
+    let hash = "9f7f1c05ae72c53d27775fff84fc2ee6456f0dcc0958ca901813a0bb0e4e208f".from_hex().unwrap();
     let secret_key = "44d995141fbc30aa0d543b3e0ad2a8fe2cdc79eb53ac027506cbe5f73b065220".from_hex().unwrap();
     let secp = Secp256k1::new();
-    let sk = SecretKey::from_slice(&secp,&secret_key[..]).unwrap();
+    let sk : SecretKey = SecretKey::from_slice(&secp,&secret_key[..]).unwrap();
+    let pk : PublicKey = PublicKey::from_secret_key(&secp,&sk).unwrap();
+    println!("{:?}",pk);
     let start = Instant::now();
     let mut i = 0u64;
     let mut shorter = 100;
